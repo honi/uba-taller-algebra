@@ -43,8 +43,8 @@ numeroDeDescomposiciones n = numeroDeDescomposicionesAux n 2
     where
         numeroDeDescomposicionesAux :: Integer -> Integer -> Integer
         numeroDeDescomposicionesAux n i
-            | i == nDiv2 && sonPrimos = 1
-            | i == nDiv2 = 0
+            | i > nDiv2 = 0
+            | sonPrimos && i == nDiv2 = 1
             | sonPrimos = 2 + numeroDeDescomposicionesAux n (i+1)
             | otherwise = numeroDeDescomposicionesAux n (i+1)
             where
@@ -55,7 +55,6 @@ numeroDeDescomposiciones n = numeroDeDescomposicionesAux n 2
 -- Función auxiliar para verificar si un número es primo.
 -- Utilizo la propiedad de que si un número no es primo, entonces uno de sus
 -- posibles factores se encuentra entre 2 y su raíz cuadrada.
--- Ref: https://stackoverflow.com/a/5811176/1390293
 esPrimo :: Integer -> Bool
 esPrimo 1 = False
 esPrimo n = esPrimoAux n (sqrt (fromIntegral n)) 2
